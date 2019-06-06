@@ -1,10 +1,10 @@
 # IoT course, Ariel university
 **_AgriHome_** - A smart plant system that measure temperature and humidity.<br />
-AgriHome is using a few sensors:<br />
-ESP32 - System On Chip Microcontoller including WiFi and Bluetooth.<br />
-BreadBoard and jumper cables.<br />
-DHT11 - Temperature and Humidity sensor.<br />
-Lamp - Color led. <br />
+AgriHome is using:<br />
+  * ESP32 - System On Chip Microcontoller including WiFi and Bluetooth.<br />
+  * BreadBoard and jumper cables.<br />
+  * DHT11 - Temperature and Humidity sensor.<br />
+  * Lamp - Color led. <br />
 
 
 ## Liberaries using ESP32
