@@ -8,8 +8,8 @@ Lamp - Color led. <br />
 
 
 ## Liberaries using ESP32
- *WiFi.h - This library allows ESP32 to connect your router.
- *PubSubClient.h - This library allows you to send and receive MQTT messages.
- *DHT.h - This library allows DHT11, DHT21 and DHT22 sensors for measuring temperature and humidity.
+ * WiFi.h - This library allows ESP32 to connect your router.<br />
+ * PubSubClient.h - This library allows you to send and receive MQTT messages.<br />
+ * DHT.h - This library allows DHT11, DHT21 and DHT22 sensors for measuring temperature and humidity.<br />
 
 
