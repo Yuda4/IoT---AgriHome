@@ -1,5 +1,5 @@
 # IoT course, Ariel university
-AgriHome - a smart plant system that measure temperature and humidity. <br />
+**AgriHome** - A smart plant system that measure temperature and humidity. <br />
 AgriHome is using a few sensors:
 ESP32 - System On Chip Microcontoller including WiFi and Bluetooth.<br />
 BreadBoard and jumper cables.<br />
