@@ -1,32 +1,39 @@
+/*****
+ All the resources for this project:
+ http://randomnerdtutorials.com/
+*****/
 
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include "DHT.h"
 
+// #include <Wire.h>         // Only needed for Arduino 1.6.5 and earlier
+#include "SSD1306Wire.h"  // legacy include: `#include "SSD1306.h"`
+ 
+int sensor_pin = 0;       // sensor input at Analog pin A0
+int value ;
 
-// DHT sensor type we're using, for other DHT sensor you can use the other defines
+// Uncomment one of the lines bellow for whatever DHT sensor type you're using!
 #define DHTTYPE DHT11   // DHT 11
 //#define DHTTYPE DHT21   // DHT 21 (AM2301)
 //#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
 
-//*****WiFi connection variables*****
 // Change the credentials below, so your ESP32 connects to your router
-const char* ssid = "REPLACE_WITH_YOUR_SSID";
-const char* password = "REPLACE_WITH_YOUR_PASSWORD";
+const char* ssid = "ENTER_SSID";
+const char* password = "ENTER_PASSWORD";
 
-//*****MQTT connection variable*****
-//Change the variable to your IP address, so it connects to your MQTT broker
-//you should connect your computer and ESP32 to same network
-const char* mqtt_server = "REPLACE_WITH_YOUR_RPI_IP_ADDRESS";
+// Change the variable to your Raspberry Pi IP address, so it connects to your MQTT broker
+const char* mqtt_server = "ENTER YOUR IP ADDRESS";
+const int mqttPort = 1883;
 
 // Initializes the espClient. You should change the espClient name if you have multiple ESPs running in your home automation system
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-// DHT Sensor - GPIO 5 = D1 connect you DHT Pin to pin #5 on board
+// DHT Sensor - GPIO 5 = D1 on ESP-12E NodeMCU board
 const int DHTPin = 5;
 
-// Lamp - LED - GPIO 4 = D2 connect you Lamp Pin to pin #5 on board
+// Lamp - LED - GPIO 4 = D2 on ESP-12E NodeMCU board
 const int lamp = 4;
 
 // Initialize DHT sensor.
@@ -39,7 +46,6 @@ long lastMeasure = 0;
 // Don't change the function below. This functions connects your ESP32 to your router
 void setup_wifi() {
   delay(10);
-  // We start by connecting to a WiFi network
   Serial.println();
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -68,8 +74,7 @@ void callback(String topic, byte* message, unsigned int length) {
   }
   Serial.println();
 
-  // If a message is received on the topic room/lamp, you check if the message is either on or off. 
-  //Turns the lamp GPIO according to the message
+  // If a message is received on the topic room/lamp, you check if the message is either on or off. Turns the lamp GPIO according to the message
   if(topic=="room/lamp"){
       Serial.print("Changing Room lamp to ");
       if(messageTemp == "on"){
@@ -84,8 +89,8 @@ void callback(String topic, byte* message, unsigned int length) {
   Serial.println();
 }
 
-  // This functions reconnects your ESP32 to your MQTT broker
-  // Change the function below if you want to subscribe to more topics with your ESP8266 
+// This functions reconnects your ESP32 to your MQTT broker
+// Change the function below if you want to subscribe to more topics with your ESP32 
 void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
@@ -132,7 +137,9 @@ void setup() {
 
 }
 
+// For this project, you don't need to change anything in the loop function. Basically it ensures that you ESP is connected to your broker
 void loop() {
+
   if (!client.connected()) {
     reconnect();
   }
@@ -140,8 +147,8 @@ void loop() {
     client.connect("ESP32Client");
 
   now = millis();
-  // Publishes new temperature and humidity every 30 seconds (30000ms)
-  if (now - lastMeasure > 30000) {
+  // Publishes new temperature and humidity every 15 mins
+  if (now - lastMeasure > 900000) {
     lastMeasure = now;
     // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
     float h = dht.readHumidity();
@@ -150,6 +157,7 @@ void loop() {
     // Read temperature as Fahrenheit (isFahrenheit = true)
     float f = dht.readTemperature(true);
 
+    
     // Check if any reads failed and exit early (to try again).
     if (isnan(h) || isnan(t) || isnan(f)) {
       Serial.println("Failed to read from DHT sensor!");
@@ -161,17 +169,24 @@ void loop() {
     static char temperatureTemp[7];
     dtostrf(hic, 6, 2, temperatureTemp);
     
-    // Uncomment to compute temperature values in Fahrenheit 
-    // float hif = dht.computeHeatIndex(f, h);
-    // static char temperatureTemp[7];
-    // dtostrf(hic, 6, 2, temperatureTemp);
-    
+
     static char humidityTemp[7];
     dtostrf(h, 6, 2, humidityTemp);
 
+  
+   value= analogRead(sensor_pin);
+   Serial.println(value);
+   // Normalize value to be between 0 to 100
+   value = map( value, 0, 4095, 0, 100);
+    
+    static char soilTemp[7];
+    dtostrf( float(value), 6, 2, soilTemp);
+    
     // Publishes Temperature and Humidity values
     client.publish("room/temperature", temperatureTemp);
     client.publish("room/humidity", humidityTemp);
+    client.publish("room/soil",soilTemp);
+
     
     Serial.print("Humidity: ");
     Serial.print(h);
@@ -182,7 +197,10 @@ void loop() {
     Serial.print(" *F\t Heat index: ");
     Serial.print(hic);
     Serial.println(" *C ");
-    // Serial.print(hif);
-    // Serial.println(" *F");
+    Serial.print("Moisture : ");
+    Serial.println(value);
+    Serial.println("%");
+    Serial.print(hif);
+    Serial.println(" *F");
   }
 } 
