@@ -37,7 +37,7 @@ All sensors are connected to a function that:
 
 
 ### Third flow - reading data from local file and chart display. </br>
-Opening a web page for displaying the data from a local file data for each parameter and BigML(next flow), also displaying the data in charts.
+Opening a web page for displaying the data from a local file data for each parameter and BigML(next flow) and displaying the data in charts - using Chart.js.
 <img src ="Node-red/Flow%20ReadCsvToCharts.png" width="800">
 </br>
 
@@ -51,4 +51,4 @@ Open connection to BigML site, uploading data source and creating:
 
 ## Results
 <img src ="Output/Chart%20Temperature%20.png" width="800">
-
+<img src ="Output/Chart%Humidity.png" width="800">
