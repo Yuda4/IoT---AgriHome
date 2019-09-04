@@ -25,4 +25,4 @@ The data will be analyzed through BigML website and produced a model that allows
 
 ## Node-Red flows
 
-<img src ="Node-red/Flow%20GetDataFromTheSensors.png" width="600">
+<img src ="Node-red/Flow%20GetDataFromTheSensors.png" width="800">
