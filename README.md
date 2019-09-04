@@ -37,6 +37,14 @@ All sensors are connected to a function that:
 
 
 ### Third flow - reading data from local file and chart display. </br>
-For each paramter displaying the data in a chart.
+Opening a web page for displaying the data from a local file data for each parameter and BigML(next flow), also displaying the data in charts.
 <img src ="Node-red/Flow%20ReadCsvToCharts.png" width="800">
+</br>
+
+### Fourth flow - BigMl. </br>
+Open connection to BigML site, uploading data source and creating:
+ * Humidity ensemble and model.
+ * Temperature ensemble and model.
+ * Association - to discover meaningful relationships among dataset fields and their value.
+<img src ="Node-red/Flow%20BigML.png" width="800">
 </br>
