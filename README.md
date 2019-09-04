@@ -20,7 +20,7 @@ AgriHome is using:<br />
  * WiFi.h - This library allows ESP32 to connect your router.<br />
  * PubSubClient.h - This library allows you to send and receive MQTT messages.<br />
  * DHT.h - This library allows DHT11, DHT21 and DHT22 sensors for measuring temperature and humidity.<br />
- * SSD1306Wire - This library allows OLED display
+ * SSD1306Wire - This library allows OLED display.
 
 ## General view
 The ESP device models through sensors several parameters - air and soil temperature and humidity. It transmits the screen, through appropriate Service Edge - (Local services) Red-Node, to the cloud. The communication between ESP device and the cloud will be done via WiFi.<br />
