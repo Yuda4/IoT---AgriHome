@@ -24,5 +24,8 @@ The data will be stored long-term in Firebase database, and will be displayed in
 The data will be analyzed through BigML website and produced a model that allows forecasting and decision-making, for example on the basis of a decision tree, and the model structure can be viewed in a suitable graph.
 
 ## Node-Red flows
+First flow - getting data from sensors to Node-red, using Mqtt protocol. All sensors are connected to a function that:
+ * Combine data to a Json file to store it in Firebase database.
+ * Combine data to a Csv file to store it in local folder in computer. </br>
 
 <img src ="Node-red/Flow%20GetDataFromTheSensors.png" width="800">
