@@ -43,6 +43,7 @@ Opening a web page for displaying the data from a local file data for each param
 
 ### Fourth flow - BigMl. </br>
 Open connection to BigML site, uploading data source and creating:
+ * Dataset.
  * Humidity ensemble and model.
  * Temperature ensemble and model.
  * Association - to discover meaningful relationships among dataset fields and their value.
