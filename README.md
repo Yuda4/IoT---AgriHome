@@ -27,6 +27,6 @@ The data will be analyzed through BigML website and produced a model that allows
 First flow - getting data from sensors to Node-red, using Mqtt protocol. </br>
 All sensors are connected to a function that:
  * Combine data to a Json file to store it in Firebase database.
- * Combine data to a Csv file to store it in local folder in computer. </br>
+ * Combine data to a Csv file to store it in a local folder in computer.
 
 <img src ="Node-red/Flow%20GetDataFromTheSensors.png" width="800">
