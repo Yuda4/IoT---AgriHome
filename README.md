@@ -45,7 +45,7 @@ Opening a web page for displaying the data from a local file data for each param
 <img src ="Node-red/Flow%20ReadCsvToCharts.png" width="800">
 </br>
 
-### Fourth flow - BigMl. </br>
+### Fourth flow - BigML. </br>
 Open connection to BigML site, uploading data source and creating:
  * Dataset.
  * Humidity ensemble and model.
