@@ -52,3 +52,9 @@ Open connection to BigML site, uploading data source and creating:
 ## Results
 <img src ="Output/Chart%20Temperature%20.png" width="800">
 <img src ="Output/Chart%20Humidity.png" width="800">
+<img src ="Output/Chart%20Soil.png" width="800">
+
+<img src ="Output/BigML%20Temperature.png" width="800">
+<img src ="Output/BigML%20Humidity.png" width="800">
+<img src ="Output/BigML%20Association%20.png" width="800">
+
