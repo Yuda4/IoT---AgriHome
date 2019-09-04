@@ -7,6 +7,7 @@ AgriHome is using:<br />
   * Soil Moisture Sensor. <br />
   * Lamp - Color led. <br />
 
+<img src = "![dht11](https://user-images.githubusercontent.com/33513480/64234507-2f79bb00-ceff-11e9-98bb-39fb8db90de5.jpg)" width="100" >
 ![dht11](https://user-images.githubusercontent.com/33513480/64234507-2f79bb00-ceff-11e9-98bb-39fb8db90de5.jpg)
 
 
