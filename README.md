@@ -14,3 +14,9 @@ AgriHome is using:<br />
  * DHT.h - This library allows DHT11, DHT21 and DHT22 sensors for measuring temperature and humidity.<br />
  * SSD1306Wire - This library allows OLED display
 
+## General view
+The ESP device models through sensors several parameters - air and soil temperature and humidity. It transmits the screen, through appropriate Service Edge - (Local services) Red-Node, to the cloud. Communication between ESP device and the cloud will be done via WiFi.
+The data will be stored long-term in Firebase database.
+The data will be displayed in graphs: each parameter (temperature, humidity and soil moisture) has a graph that allows viewing historical data based on date / time segmentation.
+The data will be analyzed through BigML website and produced a model that allows forecasting and decision-making, for example on the basis of a decision tree.
+The model structure can be viewed in a suitable graph.
