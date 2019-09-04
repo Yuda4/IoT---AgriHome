@@ -36,6 +36,7 @@ All sensors are connected to a function that:
 </br>
 
 
-### Second flow - reading data from Firebase. </br>
+### Third flow - reading data from local file and chart display. </br>
+For each paramter displaying the data in a chart.
 <img src ="Node-red/Flow%20ReadCsvToCharts.png" width="800">
 </br>
