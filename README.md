@@ -32,6 +32,7 @@ All sensors are connected to a function that:
 <img src ="Node-red/Flow%20GetDataFromTheSensors.png" width="800">
 </br>
 ### Second flow - reading data from Firebase. </br>
+bla.
 <img src ="Node-red/Flow%20ReadFromFirebase.png" width="800">
 </br>
 
