@@ -1,4 +1,4 @@
-# IoT course, Ariel university
+# IoT | Ariel university
 **_AgriHome_** - A smart plant system that measure air temperature and humidity, soil moisture and using lamp for warnings when high sampling indices.<br />
 AgriHome is using:<br />
   * ESP32 - System On Chip Microcontoller including WiFi and Bluetooth.<br />
