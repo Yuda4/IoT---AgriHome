@@ -10,7 +10,7 @@ AgriHome is using:<br />
   * Soil Moisture Sensor.<br />
   <img src = "https://user-images.githubusercontent.com/33513480/64234785-aca53000-ceff-11e9-955e-e9767c19209b.jpg" width="150">
   * Lamp - Color led. <br />
-
+  <img src = "https://user-images.githubusercontent.com/33513480/64235517-31dd1480-cf01-11e9-95b4-f3dfd4887cea.jpg" width="150">
 
 ## Liberaries using ESP32
  * WiFi.h - This library allows ESP32 to connect your router.<br />
