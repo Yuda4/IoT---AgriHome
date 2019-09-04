@@ -51,4 +51,4 @@ Open connection to BigML site, uploading data source and creating:
 
 ## Results
 <img src ="Output/Chart%20Temperature%20.png" width="800">
-<img src ="Output/Chart%Humidity.png" width="800">
+<img src ="Output/Chart%20Humidity.png" width="800">
