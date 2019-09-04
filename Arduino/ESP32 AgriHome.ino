@@ -1,22 +1,12 @@
-/*****
- All the resources for this project:
- http://randomnerdtutorials.com/
-*****/
-
 #include <WiFi.h>
 #include <PubSubClient.h>
 #include "DHT.h"
-
-// #include <Wire.h>         // Only needed for Arduino 1.6.5 and earlier
-#include "SSD1306Wire.h"  // legacy include: `#include "SSD1306.h"`
+#include "SSD1306Wire.h"
  
-int sensor_pin = 0;       // sensor input at Analog pin A0
+int sensor_pin = 0;
 int value ;
 
-// Uncomment one of the lines bellow for whatever DHT sensor type you're using!
-#define DHTTYPE DHT11   // DHT 11
-//#define DHTTYPE DHT21   // DHT 21 (AM2301)
-//#define DHTTYPE DHT22   // DHT 22  (AM2302), AM2321
+#define DHTTYPE DHT11
 
 // Change the credentials below, so your ESP32 connects to your router
 const char* ssid = "ENTER_SSID";
@@ -30,10 +20,10 @@ const int mqttPort = 1883;
 WiFiClient espClient;
 PubSubClient client(espClient);
 
-// DHT Sensor - GPIO 5 = D1 on ESP-12E NodeMCU board
+// DHT Sensor - GPIO 5
 const int DHTPin = 5;
 
-// Lamp - LED - GPIO 4 = D2 on ESP-12E NodeMCU board
+// Lamp - LED - GPIO 4
 const int lamp = 4;
 
 // Initialize DHT sensor.
@@ -43,7 +33,7 @@ DHT dht(DHTPin, DHTTYPE);
 long now = millis();
 long lastMeasure = 0;
 
-// Don't change the function below. This functions connects your ESP32 to your router
+// This functions connects your ESP32 to your router
 void setup_wifi() {
   delay(10);
   Serial.println();
@@ -60,8 +50,6 @@ void setup_wifi() {
 }
 
 // This functions is executed when some device publishes a message to a topic that your ESP32 is subscribed to
-// Change the function below to add logic to your program, so when a device publishes a message to a topic that 
-// your ESP32 is subscribed you can actually do something
 void callback(String topic, byte* message, unsigned int length) {
   Serial.print("Message arrived on topic: ");
   Serial.print(topic);
@@ -74,7 +62,7 @@ void callback(String topic, byte* message, unsigned int length) {
   }
   Serial.println();
 
-  // If a message is received on the topic room/lamp, you check if the message is either on or off. Turns the lamp GPIO according to the message
+  // If a message is received on the topic room/lamp, you check if the message is either on or off.
   if(topic=="room/lamp"){
       Serial.print("Changing Room lamp to ");
       if(messageTemp == "on"){
@@ -90,27 +78,13 @@ void callback(String topic, byte* message, unsigned int length) {
 }
 
 // This functions reconnects your ESP32 to your MQTT broker
-// Change the function below if you want to subscribe to more topics with your ESP32 
 void reconnect() {
   // Loop until we're reconnected
   while (!client.connected()) {
     Serial.print("Attempting MQTT connection...");
     // Attempt to connect
-    /*
-     YOU MIGHT NEED TO CHANGE THIS LINE, IF YOU'RE HAVING PROBLEMS WITH MQTT MULTIPLE CONNECTIONS
-     To change the ESP device ID, you will have to give a new name to the ESP32.
-     Here's how it looks:
-       if (client.connect("ESP32Client")) {
-     You can do it like this:
-       if (client.connect("ESP1_Office")) {
-     Then, for the other ESP:
-       if (client.connect("ESP2_Garage")) {
-      That should solve your MQTT multiple connections problem
-    */
     if (client.connect("ESP32Client")) {
       Serial.println("connected");  
-      // Subscribe or resubscribe to a topic
-      // You can subscribe to more topics (to control more LEDs in this example)
       client.subscribe("room/lamp");
     } else {
       Serial.print("failed, rc=");
@@ -122,7 +96,6 @@ void reconnect() {
   }
 }
 
-// The setup function sets your ESP GPIOs to Outputs, starts the serial communication at a baud rate of 115200
 // Sets your mqtt broker and sets the callback function
 // The callback function is what receives messages and actually controls the LEDs
 void setup() {
@@ -137,9 +110,7 @@ void setup() {
 
 }
 
-// For this project, you don't need to change anything in the loop function. Basically it ensures that you ESP is connected to your broker
 void loop() {
-
   if (!client.connected()) {
     reconnect();
   }
@@ -150,7 +121,6 @@ void loop() {
   // Publishes new temperature and humidity every 15 mins
   if (now - lastMeasure > 900000) {
     lastMeasure = now;
-    // Sensor readings may also be up to 2 seconds 'old' (its a very slow sensor)
     float h = dht.readHumidity();
     // Read temperature as Celsius (the default)
     float t = dht.readTemperature();
@@ -166,23 +136,22 @@ void loop() {
 
     // Computes temperature values in Celsius
     float hic = dht.computeHeatIndex(t, h, false);
+   
     static char temperatureTemp[7];
     dtostrf(hic, 6, 2, temperatureTemp);
     
-
     static char humidityTemp[7];
     dtostrf(h, 6, 2, humidityTemp);
 
-  
-   value= analogRead(sensor_pin);
-   Serial.println(value);
-   // Normalize value to be between 0 to 100
-   value = map( value, 0, 4095, 0, 100);
+    value= analogRead(sensor_pin);
+    Serial.println(value);
+    // Normalize value to be between 0 to 100
+    value = map( value, 0, 4095, 0, 100);
     
     static char soilTemp[7];
     dtostrf( float(value), 6, 2, soilTemp);
     
-    // Publishes Temperature and Humidity values
+    // Publishes Temperature, Humidity and Soil values
     client.publish("room/temperature", temperatureTemp);
     client.publish("room/humidity", humidityTemp);
     client.publish("room/soil",soilTemp);
