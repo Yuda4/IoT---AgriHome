@@ -25,7 +25,7 @@ AgriHome is using:<br />
 ## General view
 The ESP device models through sensors several parameters - air and soil temperature and humidity. It transmits the screen, through appropriate Service Edge - (Local services) Red-Node, to the cloud. The communication between ESP device and the cloud will be done via WiFi.<br />
 The data will be stored long-term in Firebase database, and will be displayed in graphs: each parameter (temperature, humidity and soil moisture) has a graph that allows viewing historical data based on date / time segmentation.<br />
-The data will be analyzed through BigML website and produced a model that allows forecasting and decision-making, for example on the basis of a decision tree, and the model structure can be viewed in a suitable graph.
+The data will be analyzed through BigML services and produced a model that allows forecasting and decision-making, for example on the basis of a decision tree, and the model structure can be viewed in a suitable graph.
 
 ## Node-Red flows
 ### First flow - getting data from sensors to Node-red, using MQTT protocol. </br>
