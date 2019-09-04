@@ -48,3 +48,7 @@ Open connection to BigML site, uploading data source and creating:
  * Association - to discover meaningful relationships among dataset fields and their value.
 <img src ="Node-red/Flow%20BigML.png" width="800">
 </br>
+## Results
+<img src ="Output/Chart%20Temperature%20.png" width="800">
+</br>
+
